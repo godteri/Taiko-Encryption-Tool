@@ -6,8 +6,8 @@ How to add custom songs to taiko no tatujin
 2. [okku3ds](https://www.teampapafox.org/projects/okku3ds.html)
 3. [Eternity Audio Tool](https://animegamemods.net/thread/618/)
 4. [.NET Core 3.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/3.1/runtime)
-5. Some shitty program that i made
-6. A good text editor
+5. [A good text editor](https://notepad-plus-plus.org/downloads/)
+6. Some shitty program that i made
 
 ## Steps:
 1. In the xbox app make sure that mods are enabled, then click on go to modification folder
@@ -19,11 +19,12 @@ for the chart and the readassets contains the information about the song
 
 4. Make a new folder in the fumen folder and name it a short word
 Remember this name cause you will be using it throughout this tutorial
-I'll be reffering to it as (id)
+I'll be referring to it as (id)
 
 5. You're gonna wanna grab three files from the readassets folder
 (Musicinfo.bin, Songinfo.bin and newwordlist.bin)
-and a random song file from the sound folder
+and copy a random song file from the sound folder
+**MAKE SURE TO MAKE BACKUPS!**
 
 6. Drag the musicinfo, songinfo and newwordlist each separately into
 the taiko encryption tool exe, and select decrypt readasset
@@ -48,7 +49,7 @@ In newwordlist make a new entry, the key should be song_(id) and change all of t
 
 12. Drag and replace them into the readasset folder in the streamingassets folder
 
-13. Drag the music file into the encryption tool, and select decrypt music file, then
+13. Drag the music file into the encryption tool exe, and select decrypt music file, then
 rename the fileextension from bin to acb
 
 14. Open up eternity and open the file
@@ -70,7 +71,7 @@ rename the fileextension from acb to bin
 
 22. Select the difficulty
 
-23. Hit "y"
+23. Ignore the errors and hit "y"
 
 24. There will now be a fumen file in the tja folder, drag it into the encryption tool and hit encrypt fumen
 
