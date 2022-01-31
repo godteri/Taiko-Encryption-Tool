@@ -30,20 +30,20 @@ the taiko encryption tool exe, and select decrypt readasset
 7. You have to edit the musicinfo, songinfo and newwordlist to add a new song into the game
 these are json files im not gonna go into how they work, so if you are confused look up a tutorial
 
-8. musicinfo
+8. **[musicinfo]**
 In the musicinfo file scroll down to until you see "UniqueId":75 and copy that entry
 After you've pasted it, edit the uniqueid to 76, the id to to (id), then the songfilename to song_(id)
 Also make sure that the price is 0
 The rest is optional to edit
 
-9. songinfo
-The songinfo is simple just make a new entry change the id to (id)
+9. **[songinfo]**
+The songinfo is simple just make a new entry, change the id to (id)
 then change the offset to the one in the tja without any punctuation
 
-10. newwordlist
+10. **[newwordlist]**
 In newwordlist make a new entry, the key should be song_(id) and change all of the text to the name of the song
 
-11. Drag each one of the separately into the taiko encryption tool exe and select encrypt readasset
+11. Drag each one of the files separately into the taiko encryption tool exe and select encrypt readasset
 
 12. Drag and replace them into the readasset folder in the streamingassets folder
 
@@ -59,7 +59,7 @@ rename the fileextension from bin to acb
 17. Drag the music file into the encryption tool, and select encrypt music file, then
 rename the fileextension from acb to bin
 
-18. Rename the file into "sound_(id)", then put it in the sounds folder in streamingassets
+18. Rename the file into "song_(id)", then put it in the sounds folder in streamingassets
 
 19. Open the 3dstaiko folder go into okku, and in the bin folder delete the lzx file and the ffmpeg file
 
