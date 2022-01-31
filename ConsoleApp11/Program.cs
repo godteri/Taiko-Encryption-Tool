@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.IO.Compression;
 using System.Text;
 
-namespace ConsoleApp11
+namespace TaikoEncryptionTool
 {
     class Program
     {
