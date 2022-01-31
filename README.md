@@ -40,7 +40,7 @@ The rest is optional to edit
 
 9. **[songinfo]**
 The songinfo is simple just make a new entry, change the id to (id)
-then change the offset to the one in the tja without any punctuation
+then change the offset to somewhere around -2000 (i use -2030)
 
 10. **[newwordlist]**
 In newwordlist make a new entry, the key should be song_(id) and change all of the text to the name of the song
