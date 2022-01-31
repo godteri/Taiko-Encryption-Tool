@@ -82,3 +82,13 @@ rename the fileextension from acb to bin
 27. Do this for each difficulty you want
 
 28. If you've done this correctly, you should now have a new song in the game
+
+## Troubleshooting:
+Q. The only thing that shows up when the game starts is load text
+
+A. This means that there is something wrong with the readassets files
+make sure theres no errors when editing the decrypted file and make sure you encrypt it afterwards
+
+Q. Okku converter gives error when trying to convert tja
+
+A. Open the tja in notepad++ hit the format tab, then click on convert to utf-8 and save then try again
