@@ -28,10 +28,10 @@ namespace TaikoEncryptionTool
 			{
 				stream.CopyTo(gzipStream);
 			}
-			FileStream tmp = File.Create(@"C:\temp\taiko.tmp");
+			FileStream tmp = File.Create(Path.GetTempPath() + "taiko.tmp");
 			tmp.Write(memoryStream.ToArray());
 			tmp.Close();
-			MemoryStream memoryStream2 = new MemoryStream(Cryptgraphy.CreateAllAesBytes(@"C:\temp\taiko.tmp", type));
+			MemoryStream memoryStream2 = new MemoryStream(Cryptgraphy.CreateAllAesBytes(Path.GetTempPath() + "taiko.tmp", type));
 			return memoryStream2.ToArray();
 		}
 		public static byte[] ReadAllAesAndGZipBytes(string path, Cryptgraphy.AesKeyType type)

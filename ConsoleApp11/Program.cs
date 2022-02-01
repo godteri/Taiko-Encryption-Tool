@@ -26,55 +26,109 @@ namespace TaikoEncryptionTool
             Console.WriteLine("5. Encrypt Fumen");
             Console.WriteLine("6. Encrypt ReadAssets");
 
-            ConsoleKeyInfo key = Console.ReadKey();
+            ConsoleKeyInfo key = Console.ReadKey(true);
 
             if (key.Key == ConsoleKey.D1)
             {
-                //Decrypt Sound
-                byte[] DecryptedBytes = Cryptgraphy.ReadAllAesBytes(FilePath, Cryptgraphy.AesKeyType.Type0);
-                FileStream file = File.Create(FilePath);
-                file.Write(DecryptedBytes);
-                file.Close();
+                try
+                {
+                    //Decrypt Sound
+                    byte[] DecryptedBytes = Cryptgraphy.ReadAllAesBytes(FilePath, Cryptgraphy.AesKeyType.Type0);
+                    FileStream file = File.Create(FilePath);
+                    file.Write(DecryptedBytes);
+                    file.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception occurred: " + exc);
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
+                }
             }
             else if (key.Key == ConsoleKey.D2)
             {
-                //Decrypt Fumen
-                byte[] DecryptedBytes = Cryptgraphy.ReadAllAesAndGZipBytes(FilePath, Cryptgraphy.AesKeyType.Type2);
-                FileStream file = File.Create(FilePath);
-                file.Write(DecryptedBytes);
-                file.Close();
+                try
+                {
+                    //Decrypt Fumen
+                    byte[] DecryptedBytes = Cryptgraphy.ReadAllAesAndGZipBytes(FilePath, Cryptgraphy.AesKeyType.Type2);
+                    FileStream file = File.Create(FilePath);
+                    file.Write(DecryptedBytes);
+                    file.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception occurred: " + exc);
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
+                }
             }
             else if (key.Key == ConsoleKey.D3)
             {
-                //Decrypt ReadAssets
-                string DecryptedBytes = Cryptgraphy.ReadZipText(FilePath, Encoding.UTF8, Cryptgraphy.AesKeyType.Type1);
-                FileStream file = File.Create(FilePath);
-                file.Write(Encoding.UTF8.GetBytes(DecryptedBytes));
-                file.Close();
+                try
+                {
+                    //Decrypt ReadAssets
+                    string DecryptedBytes = Cryptgraphy.ReadZipText(FilePath, Encoding.UTF8, Cryptgraphy.AesKeyType.Type1);
+                    FileStream file = File.Create(FilePath);
+                    file.Write(Encoding.UTF8.GetBytes(DecryptedBytes));
+                    file.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception occurred: " + exc);
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
+                }
             }
             else if (key.Key == ConsoleKey.D4)
             {
-                //Encrypt Sound
-                byte[] DecryptedBytes = Cryptgraphy.CreateAllAesBytes(FilePath, Cryptgraphy.AesKeyType.Type0);
-                FileStream file = File.Create(FilePath);
-                file.Write(DecryptedBytes);
-                file.Close();
+                try
+                {
+                    //Encrypt Sound
+                    byte[] DecryptedBytes = Cryptgraphy.CreateAllAesBytes(FilePath, Cryptgraphy.AesKeyType.Type0);
+                    FileStream file = File.Create(FilePath);
+                    file.Write(DecryptedBytes);
+                    file.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception occurred: " + exc);
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
+                }
             }
             else if (key.Key == ConsoleKey.D5)
             {
-                //Encrypt Fumen
-                byte[] DecryptedBytes = Cryptgraphy.CreateZipText(FilePath, Cryptgraphy.AesKeyType.Type2);
-                FileStream file = File.Create(FilePath);
-                file.Write(DecryptedBytes);
-                file.Close();
+                try
+                {
+                    //Encrypt Fumen
+                    byte[] DecryptedBytes = Cryptgraphy.CreateZipText(FilePath, Cryptgraphy.AesKeyType.Type2);
+                    FileStream file = File.Create(FilePath);
+                    file.Write(DecryptedBytes);
+                    file.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception occurred: " + exc);
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
+                }
             }
             else if (key.Key == ConsoleKey.D6)
             {
-                //Encrypt ReadAssets
-                byte[] DecryptedBytes = Cryptgraphy.CreateZipText(FilePath, Cryptgraphy.AesKeyType.Type1);
-                FileStream file = File.Create(FilePath);
-                file.Write(DecryptedBytes);
-                file.Close();
+                try
+                {
+                    //Encrypt ReadAssets
+                    byte[] DecryptedBytes = Cryptgraphy.CreateZipText(FilePath, Cryptgraphy.AesKeyType.Type1);
+                    FileStream file = File.Create(FilePath);
+                    file.Write(DecryptedBytes);
+                    file.Close();
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception occurred: " + exc);
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
+                }
             }
         }
 	}
