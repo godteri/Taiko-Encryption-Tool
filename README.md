@@ -5,7 +5,7 @@ How to add custom songs to taiko no tatujin
 1. Tja charts
 2. [okku3ds](https://www.teampapafox.org/projects/okku3ds.html)
 3. [Eternity Audio Tool](https://animegamemods.net/thread/618/)
-4. [.NET Core 3.1 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/3.1/runtime)
+4. [.NET Core 3.1 Runtime (x86)](https://dotnet.microsoft.com/en-us/download/dotnet/3.1/runtime)
 5. [A good text editor](https://notepad-plus-plus.org/downloads/)
 6. Some shitty program that i made
 
