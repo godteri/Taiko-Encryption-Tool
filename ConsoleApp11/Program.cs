@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Security.Cryptography;
-using System.IO.Compression;
 using System.Text;
 
 namespace TaikoEncryptionTool
@@ -12,6 +10,9 @@ namespace TaikoEncryptionTool
         {
             if(args.Length == 0)
             {
+                Console.WriteLine("No file detected, make sure to drag the file on the exe!");
+                Console.WriteLine("Press Any Key to close");
+                Console.ReadKey();
                 Environment.Exit(0);
             }
 
@@ -33,10 +34,13 @@ namespace TaikoEncryptionTool
                 try
                 {
                     //Decrypt Sound
-                    byte[] DecryptedBytes = Cryptgraphy.ReadAllAesBytes(FilePath, Cryptgraphy.AesKeyType.Type0);
+                    byte[] DecryptedBytes = EncryptTool.ReadAES(FilePath, EncryptTool.AesKeyType.Type0);
                     FileStream file = File.Create(FilePath);
                     file.Write(DecryptedBytes);
                     file.Close();
+                    Console.WriteLine("Finished Decrypting");
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
                 }
                 catch (Exception exc)
                 {
@@ -50,10 +54,13 @@ namespace TaikoEncryptionTool
                 try
                 {
                     //Decrypt Fumen
-                    byte[] DecryptedBytes = Cryptgraphy.ReadAllAesAndGZipBytes(FilePath, Cryptgraphy.AesKeyType.Type2);
+                    byte[] DecryptedBytes = EncryptTool.UnzipBytes(FilePath, EncryptTool.AesKeyType.Type2);
                     FileStream file = File.Create(FilePath);
                     file.Write(DecryptedBytes);
                     file.Close();
+                    Console.WriteLine("Finished Decrypting");
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
                 }
                 catch (Exception exc)
                 {
@@ -67,10 +74,13 @@ namespace TaikoEncryptionTool
                 try
                 {
                     //Decrypt ReadAssets
-                    string DecryptedBytes = Cryptgraphy.ReadZipText(FilePath, Encoding.UTF8, Cryptgraphy.AesKeyType.Type1);
+                    string DecryptedBytes = EncryptTool.UnzipText(FilePath, Encoding.UTF8, EncryptTool.AesKeyType.Type1);
                     FileStream file = File.Create(FilePath);
                     file.Write(Encoding.UTF8.GetBytes(DecryptedBytes));
                     file.Close();
+                    Console.WriteLine("Finished Decrypting");
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
                 }
                 catch (Exception exc)
                 {
@@ -84,10 +94,13 @@ namespace TaikoEncryptionTool
                 try
                 {
                     //Encrypt Sound
-                    byte[] DecryptedBytes = Cryptgraphy.CreateAllAesBytes(FilePath, Cryptgraphy.AesKeyType.Type0);
+                    byte[] DecryptedBytes = EncryptTool.CreateAES(FilePath, EncryptTool.AesKeyType.Type0);
                     FileStream file = File.Create(FilePath);
                     file.Write(DecryptedBytes);
                     file.Close();
+                    Console.WriteLine("Finished Encrypting");
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
                 }
                 catch (Exception exc)
                 {
@@ -101,10 +114,13 @@ namespace TaikoEncryptionTool
                 try
                 {
                     //Encrypt Fumen
-                    byte[] DecryptedBytes = Cryptgraphy.CreateZipText(FilePath, Cryptgraphy.AesKeyType.Type2);
+                    byte[] DecryptedBytes = EncryptTool.ZipText(FilePath, EncryptTool.AesKeyType.Type2);
                     FileStream file = File.Create(FilePath);
                     file.Write(DecryptedBytes);
                     file.Close();
+                    Console.WriteLine("Finished Encrypting");
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
                 }
                 catch (Exception exc)
                 {
@@ -118,10 +134,13 @@ namespace TaikoEncryptionTool
                 try
                 {
                     //Encrypt ReadAssets
-                    byte[] DecryptedBytes = Cryptgraphy.CreateZipText(FilePath, Cryptgraphy.AesKeyType.Type1);
+                    byte[] DecryptedBytes = EncryptTool.ZipText(FilePath, EncryptTool.AesKeyType.Type1);
                     FileStream file = File.Create(FilePath);
                     file.Write(DecryptedBytes);
                     file.Close();
+                    Console.WriteLine("Finished Encrypting");
+                    Console.WriteLine("Press Any Key to close");
+                    Console.ReadKey();
                 }
                 catch (Exception exc)
                 {

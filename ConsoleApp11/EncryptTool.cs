@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TaikoEncryptionTool
 {
-	public class Cryptgraphy
+	public class EncryptTool
 	{
-		public static string ReadZipText(string path, Encoding encoding, Cryptgraphy.AesKeyType type)
+		public static string UnzipText(string path, Encoding encoding, EncryptTool.AesKeyType type)
 		{
-			MemoryStream stream = new MemoryStream(Cryptgraphy.ReadAllAesBytes(path, type));
+			MemoryStream stream = new MemoryStream(EncryptTool.ReadAES(path, type));
 			MemoryStream memoryStream = new MemoryStream();
 			using (GZipStream gzipStream = new GZipStream(stream, CompressionMode.Decompress))
 			{
@@ -20,7 +18,7 @@ namespace TaikoEncryptionTool
 			}
 			return encoding.GetString(memoryStream.ToArray());
 		}
-		public static byte[] CreateZipText(string path, Cryptgraphy.AesKeyType type)
+		public static byte[] ZipText(string path, EncryptTool.AesKeyType type)
 		{
 			MemoryStream stream = new MemoryStream(File.ReadAllBytes(path));
 			MemoryStream memoryStream = new MemoryStream();
@@ -31,67 +29,64 @@ namespace TaikoEncryptionTool
 			FileStream tmp = File.Create(Path.GetTempPath() + "taiko.tmp");
 			tmp.Write(memoryStream.ToArray());
 			tmp.Close();
-			MemoryStream memoryStream2 = new MemoryStream(Cryptgraphy.CreateAllAesBytes(Path.GetTempPath() + "taiko.tmp", type));
+			MemoryStream memoryStream2 = new MemoryStream(EncryptTool.CreateAES(Path.GetTempPath() + "taiko.tmp", type));
 			return memoryStream2.ToArray();
 		}
-		public static byte[] ReadAllAesAndGZipBytes(string path, Cryptgraphy.AesKeyType type)
+		public static byte[] UnzipBytes(string path, EncryptTool.AesKeyType type)
 		{
-			MemoryStream stream = new MemoryStream(Cryptgraphy.ReadAllAesBytes(path, type));
+			MemoryStream stream = new MemoryStream(EncryptTool.ReadAES(path, type));
 			MemoryStream memoryStream = new MemoryStream();
+
 			using (GZipStream gzipStream = new GZipStream(stream, CompressionMode.Decompress))
 			{
 				gzipStream.CopyTo(memoryStream);
 			}
 			return memoryStream.ToArray();
 		}
-		public static byte[] ReadAllAesBytes(string path, Cryptgraphy.AesKeyType type)
+		public static byte[] ReadAES(string path, EncryptTool.AesKeyType type)
 		{
-			byte[] array = File.ReadAllBytes(path);
-			int num = array.Length - 16;
-			byte[] array2 = new byte[num];
-			byte[] array3 = new byte[16];
-			Array.Copy(array, 0, array3, 0, 16);
-			byte[] result;
+			byte[] EncryptedBytes = File.ReadAllBytes(path);
+			int num = EncryptedBytes.Length - 16;
+			byte[] DecryptedBytes = new byte[num];
+			byte[] IV = new byte[16];
+			Array.Copy(EncryptedBytes, 0, IV, 0, 16);
+			byte[] FinalDecryptedBytes;
 			using (ICryptoTransform cryptoTransform = new AesCryptoServiceProvider
 			{
 				BlockSize = 128,
 				KeySize = 256,
 				Mode = CipherMode.CBC,
 				Padding = PaddingMode.PKCS7,
-				IV = array3,
-				Key = Encoding.ASCII.GetBytes(Cryptgraphy.aesKey(type))
+				IV = IV,
+				Key = Encoding.ASCII.GetBytes(EncryptTool.AESKey(type))
 			}.CreateDecryptor())
 			{
-				using (MemoryStream memoryStream = new MemoryStream(array, 16, num))
+				using (MemoryStream memoryStream = new MemoryStream(EncryptedBytes, 16, num))
 				{
 					using (CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoTransform, CryptoStreamMode.Read))
 					{
 						using (BinaryReader binaryReader = new BinaryReader(cryptoStream))
 						{
-							binaryReader.Read(array2, 0, num);
+							binaryReader.Read(DecryptedBytes, 0, num);
 						}
 					}
 				}
-				result = array2;
+				FinalDecryptedBytes = DecryptedBytes;
 			}
-			return result;
+			return FinalDecryptedBytes;
 		}
-		public static byte[] CreateAllAesBytes(string path, Cryptgraphy.AesKeyType type)
+		public static byte[] CreateAES(string path, EncryptTool.AesKeyType type)
 		{
-			byte[] array = File.ReadAllBytes(path);
-			int num = array.Length - 16;
-			byte[] array2 = new byte[num];
-			byte[] array3 = new byte[16];
-			Array.Copy(array, 0, array3, 0, 16);
-			byte[] result;
+			byte[] UnencryptedBytes = File.ReadAllBytes(path);
+			byte[] EncryptedBytes;
 			using (ICryptoTransform cryptoTransform = new AesCryptoServiceProvider
 			{
 				BlockSize = 128,
 				KeySize = 256,
 				Mode = CipherMode.CBC,
 				Padding = PaddingMode.PKCS7,
-				IV = Encoding.UTF8.GetBytes("1234567890123456"),
-				Key = Encoding.ASCII.GetBytes(Cryptgraphy.aesKey(type))
+				IV = Encoding.UTF8.GetBytes("MadeByGodteriOwO"),
+				Key = Encoding.ASCII.GetBytes(EncryptTool.AESKey(type))
 			}.CreateEncryptor())
 			{
 				using (MemoryStream memoryStream = new MemoryStream())
@@ -100,47 +95,47 @@ namespace TaikoEncryptionTool
 					{ 
 						using (BinaryWriter binaryWriter = new BinaryWriter(cryptoStream))
 						{
-							binaryWriter.Write(array);
+							binaryWriter.Write(UnencryptedBytes);
 						}
 					}
-					result = Encoding.UTF8.GetBytes("1234567890123456");
-					result = Combine(result, memoryStream.ToArray());
+					EncryptedBytes = Encoding.UTF8.GetBytes("MadeByGodteriOwO");
+					EncryptedBytes = Combine(EncryptedBytes, memoryStream.ToArray());
 				}	
 			}
-			return result;
+			return EncryptedBytes;
 		}
-		private static string aesKey(Cryptgraphy.AesKeyType type)
+		private static string AESKey(EncryptTool.AesKeyType type)
 		{
 			string text = "";
 			for (int i = 0; i < 16; i++)
 			{
 				int j;
-				for (j = Cryptgraphy.aesNum(i); j > 255; j -= 256)
+				for (j = EncryptTool.AESNum(i); j > 255; j -= 256)
 				{
 				}
 				int num = i * 2;
-				if (type != Cryptgraphy.AesKeyType.Type1)
+				if (type != EncryptTool.AesKeyType.Type1)
 				{
-					if (type != Cryptgraphy.AesKeyType.Type2)
+					if (type != EncryptTool.AesKeyType.Type2)
 					{
-						text += Convert.ToChar((int)Cryptgraphy.aesValType0[num] ^ j).ToString();
-						text += Convert.ToChar((int)Cryptgraphy.aesValType0[num + 1] ^ j).ToString();
+						text += Convert.ToChar((int)EncryptTool.aesValType0[num] ^ j).ToString();
+						text += Convert.ToChar((int)EncryptTool.aesValType0[num + 1] ^ j).ToString();
 					}
 					else
 					{
-						text += Convert.ToChar((int)Cryptgraphy.aesValType2[num] ^ j).ToString();
-						text += Convert.ToChar((int)Cryptgraphy.aesValType2[num + 1] ^ j).ToString();
+						text += Convert.ToChar((int)EncryptTool.aesValType2[num] ^ j).ToString();
+						text += Convert.ToChar((int)EncryptTool.aesValType2[num + 1] ^ j).ToString();
 					}
 				}
 				else
 				{
-					text += Convert.ToChar((int)Cryptgraphy.aesValType1[num] ^ j).ToString();
-					text += Convert.ToChar((int)Cryptgraphy.aesValType1[num + 1] ^ j).ToString();
+					text += Convert.ToChar((int)EncryptTool.aesValType1[num] ^ j).ToString();
+					text += Convert.ToChar((int)EncryptTool.aesValType1[num + 1] ^ j).ToString();
 				}
 			}
 			return text;
 		}
-		private static int aesNum(int n)
+		private static int AESNum(int n)
 		{
 			int i = 0;
 			int num = 1;
