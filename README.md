@@ -8,18 +8,18 @@ How to add custom songs to taiko no tatujin
 4. [.NET Core 3.1 Runtime (x86)](https://dotnet.microsoft.com/en-us/download/dotnet/3.1/runtime)
 5. [A good text editor](https://notepad-plus-plus.org/downloads/)
 6. Some shitty program that i made
+7. Access to the taiko no tatsujin folder
 
 ## Steps:
-1. In the xbox app make sure that mods are enabled, then click on go to modification folder
+1. Locate your Taiko No Tatsujin installation folder and open it
 
 2. Then go into the Taiko no Tatsujin_Data folder, and then the streamingassets folder
 
 3. the fumen folder contains charts, the sound folder contains music 
 for the chart and the readassets contains the information about the song
 
-4. Make a new folder in the fumen folder and name it a short word
-Remember this name cause you will be using it throughout this tutorial
-I'll be referring to it as (id)
+4. Make a new folder in the fumen folder and name it a short word ex. "custom1"  
+**Remember this name cause you will be using it throughout this tutorial**
 
 5. You're gonna wanna grab three files from the readassets folder
 (Musicinfo.bin, Songinfo.bin and newwordlist.bin)
@@ -29,27 +29,31 @@ and copy a random song file from the sound folder
 6. Drag the musicinfo, songinfo and newwordlist each separately into
 the taiko encryption tool exe, and select decrypt readasset
 
-7. You have to edit the musicinfo, songinfo and newwordlist to add a new song into the game
-these are json files im not gonna go into how they work, so if you are confused look up a tutorial
+7. You have to edit the musicinfo, songinfo and newwordlist to get the song in the game
+these are json files, if you dont format it correctly the game won't load
 
 8. **[musicinfo]**
-In the musicinfo file scroll down to until you see "UniqueId":75 and copy that entry
-After you've pasted it, edit the uniqueid to 76, the id to to (id), then the songfilename to song_(id)
-Also make sure that the price is 0
-The rest is optional to edit
+
+![MusicInfo](https://i.imgur.com/dnFaoWT.png)
 
 9. **[songinfo]**
-The songinfo is simple just make a new entry, change the id to (id)
-then change the offset to somewhere around -2000 (i use -2030)
+
+![image](https://i.imgur.com/IdL0nMI.png)
+
 
 10. **[newwordlist]**
-In newwordlist make a new entry, the key should be song_(id) and change all of the text to the name of the song
+
+![MusicInfo](https://i.imgur.com/tAJQfHu.png)
+
+![MusicInfo](https://i.imgur.com/iR8xHte.png)
+
+![MusicInfo](https://i.imgur.com/bKYM5mL.png)
 
 11. Drag each one of the files separately into the taiko encryption tool exe and select encrypt readasset
 
 12. Drag and replace them into the readasset folder in the streamingassets folder
 
-13. Drag the music file into the encryption tool exe, and select decrypt music file, then
+13. Drag the music file into the Taiko Encryption Tool exe, and select decrypt music file, then
 rename the fileextension from bin to acb
 
 14. Open up eternity and open the file
@@ -58,10 +62,10 @@ rename the fileextension from bin to acb
 
 16. Click on file then save
 
-17. Drag the music file into the encryption tool, and select encrypt music file, then
+17. Drag the music file into the Taiko Encryption Tool exe, and select encrypt music file, then
 rename the fileextension from acb to bin
 
-18. Rename the file into "song_(id)", then put it in the sounds folder in streamingassets
+18. Rename the file into "song_(name)", then put it in the sounds folder in streamingassets
 
 19. Open the 3dstaiko folder go into okku, and in the bin folder delete the lzx file and the ffmpeg file
 
@@ -69,15 +73,15 @@ rename the fileextension from acb to bin
 
 21. Select the tja you want to add to the game
 
-22. Select the difficulty
+22. Select a difficulty
 
 23. Ignore the errors and hit "y"
 
 24. There will now be a fumen file in the tja folder, drag it into the encryption tool and hit encrypt fumen
 
-25. Then rename the fumen into "(id)_(difficulty).bin" the difficulties are "e" easy "n" normal "h" hard "m" extreme "x" ura oni
+25. Then rename the fumen into "(name)_(difficulty).bin" the difficulties are "e" easy "n" normal "h" hard "m" extreme "x" ura oni
 
-26. Drag the fumen into the folder you created in the fumen folder in streamingassets
+26. Drag the fumen file into the folder you created in the fumen folder in streamingassets
 
 27. Do this for each difficulty you want
 
